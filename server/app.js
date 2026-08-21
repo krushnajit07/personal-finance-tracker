@@ -4,6 +4,8 @@ import dotenv from 'dotenv';
 import helmet from 'helmet';
 import rateLimit from 'express-rate-limit';
 
+import authRoutes from './routes/authRoutes.js';
+
 dotenv.config();
 
 const app = express();
@@ -35,6 +37,8 @@ app.use(rateLimit({
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+app.use('/api/auth', authRoutes);
 
 app.get('/health', (req, res) => {
   res.json({ status: 'Server is running' });
