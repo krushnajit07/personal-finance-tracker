@@ -10,6 +10,8 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import Login from './pages/Login'
 import Signup from './pages/Signup'
+import Layout from './components/layout/Layout'
+import Dashboard from './pages/Dashboard'
 import { refreshUser } from './redux/slices/authSlice'
 
 function ProtectedRoute() {
@@ -20,23 +22,6 @@ function ProtectedRoute() {
   return isAuthenticated ? <Outlet /> : <Navigate to="/login" replace />
 }
 
-function Dashboard() {
-  const { user } = useSelector(
-    (state) => state.auth
-  )
-
-  return (
-    <div className="min-h-screen bg-gray-100 p-8">
-      <h1 className="text-3xl font-bold text-gray-800">
-        Welcome, {user?.name}
-      </h1>
-
-      <p className="mt-2 text-gray-600">
-        Finance Dashboard
-      </p>
-    </div>
-  )
-}
 
 function App() {
   const dispatch = useDispatch()
@@ -56,8 +41,10 @@ function App() {
         <Route path="/signup" element={<Signup />} />
 
         <Route element={<ProtectedRoute />}>
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          <Route element={<Layout />}>
+            <Route path="/dashboard" element={<Dashboard />} />
+            <Route path="/" element={<Navigate to="/dashboard" replace />} />
+          </Route>
         </Route>
 
         <Route path="*" element={<Navigate to="/dashboard" replace />}
