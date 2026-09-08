@@ -108,7 +108,7 @@ export const updateTransaction = async (req, res) => {
     const transaction = await Transaction.findOneAndUpdate(
       { _id: id, userId: req.userId },
       update,
-      { new: true, runValidators: true }
+      { returnDocument: 'after', runValidators: true }
     );
 
     if (!transaction) {
