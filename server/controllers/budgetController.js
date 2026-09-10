@@ -18,7 +18,7 @@ export const setBudget = async (req, res) => {
         categoryBudgets: categoryBudgets || [],
         updatedAt: new Date()
       },
-      { new: true, upsert: true, runValidators: true, setDefaultsOnInsert: true }
+      { returnDocument: 'after', upsert: true, runValidators: true, setDefaultsOnInsert: true }
     );
 
     res.status(200).json({

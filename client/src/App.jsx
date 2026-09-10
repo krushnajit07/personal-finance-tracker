@@ -13,6 +13,7 @@ import Signup from './pages/Signup'
 import Layout from './components/layout/Layout'
 import Dashboard from './pages/Dashboard'
 import Transactions from './pages/Transactions'
+import Budget from './pages/Budget';
 import { refreshUser } from './redux/slices/authSlice'
 
 function ProtectedRoute() {
@@ -45,6 +46,7 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/transactions" element={<Transactions />}/>
+            <Route path="/budget" element={<Budget />} />
             <Route path="/" element={<Navigate to="/dashboard" replace />} />
           </Route>
         </Route>
